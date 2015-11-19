@@ -10,7 +10,7 @@ namespace Sunddk.Models
         public int MeasurementId { get; set; }
         public DateTime Date { get; set; }
         public double Weight { get; set; }
-        public double Height { get; set; }
+        public int Height { get; set; }
         public double BMR { get; set; }
         public virtual Person Person { get; set; }
         public int PersonId { get; set; }
