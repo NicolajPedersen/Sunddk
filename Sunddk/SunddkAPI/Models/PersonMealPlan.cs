@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SunddkAPI.Models
 {
-    public class PersonMealPlanLine
+    public class PersonMealPlan
     {
         public DateTime EndDate { get; set; }
         public bool IsActive { get; set; }

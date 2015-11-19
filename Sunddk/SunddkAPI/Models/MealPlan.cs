@@ -10,7 +10,7 @@ namespace SunddkAPI.Models
         public string Name { get; set; }
         public double MaxCalories { get; set; }
         public string Description { get; set; }
-        public List<PersonMealPlanLine> PersonMealPlanLine { get; set; }
+        public List<PersonMealPlan> PersonMealPlan { get; set; }
         public List<Meal> Meal { get; set; }
 
     }

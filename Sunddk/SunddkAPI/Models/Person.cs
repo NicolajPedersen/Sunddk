@@ -13,7 +13,7 @@ namespace SunddkAPI.Models
         public string Gender { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public PersonMealPlanLine PersonMealPlanLine { get; set; }
+        public PersonMealPlan PersonMealPlanLine { get; set; }
         public List<Measurement> Measurements { get; set; }
 
 
