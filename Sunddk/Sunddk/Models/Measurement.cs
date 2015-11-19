@@ -12,5 +12,7 @@ namespace Sunddk.Models
         public double Weight { get; set; }
         public double Height { get; set; }
         public double BMR { get; set; }
+        public virtual Person Person { get; set; }
+        public int PersonId { get; set; }
     }
 }
