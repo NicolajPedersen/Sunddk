@@ -11,6 +11,7 @@ namespace Sunddk.Controllers {
             {
                 var Person = new Models.Person();
                 Person.Name = "Mig";
+                Person.DateOfBirth = DateTime.Now;
                 db.Persons.Add(Person);
                 db.SaveChanges();
             }
