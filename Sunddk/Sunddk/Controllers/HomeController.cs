@@ -7,6 +7,14 @@ using System.Web.Mvc;
 namespace Sunddk.Controllers {
     public class HomeController : Controller {
         public ActionResult Index() {
+            using (var db = new Models.MealPlanContext())
+            {
+                var Person = new Models.Person();
+                Person.Name = "Mig";
+                db.Persons.Add(Person);
+                db.SaveChanges();
+            }
+            
             return View();
         }
 
