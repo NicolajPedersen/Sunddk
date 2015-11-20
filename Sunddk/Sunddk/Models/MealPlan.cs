@@ -7,7 +7,7 @@ namespace Sunddk.Models
 {
     public class MealPlan
     {
-        public int Id { get; set; }
+        public int MealPlanId { get; set; }
         public string Name { get; set; }
         public double MaxCalories { get; set; }
         public string Description { get; set; }
