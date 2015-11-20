@@ -13,6 +13,7 @@ namespace Sunddk.Models
 
         }
         public DbSet<Meal> Meals { get; set; }
+        public DbSet<Testt> Testts { get; set; }
         public DbSet<MealPlan> MealPlans { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
