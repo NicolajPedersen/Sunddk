@@ -18,6 +18,7 @@ namespace Sunddk.Controllers
         [HttpGet]
         public ActionResult CreateUser(string email) {
 
+            return View("CreateUser");
 
         }
     }

@@ -164,7 +164,7 @@ namespace Sunddk.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //return RedirectToAction("Index", "Home");
-                    return RedirectToAction("CreateUser", "CreateUser");
+                    return RedirectToAction("CreateUser", "CreateUser", user.Email);
                 }
                 AddErrors(result);
             }
