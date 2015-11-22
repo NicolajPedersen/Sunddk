@@ -12,6 +12,6 @@ namespace Sunddk.Models
         public double MaxCalories { get; set; }
         public string Description { get; set; }
         public virtual List<Meal> Meals { get; set; }
-        public  List<int> MealsId { get; set; }
+        public List<int> MealsId { get; set; }
     }
 }
