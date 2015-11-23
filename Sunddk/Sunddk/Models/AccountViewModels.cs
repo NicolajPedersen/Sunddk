@@ -77,17 +77,18 @@ namespace Sunddk.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Bekræft password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         // Dette er noget som jeg selv har tilføjet til koden!!
-        [Display(Name = "User Name")]
+        [Display(Name = "Brugernavn")]
         public string Name { get; set; }
-        [Display(Name = "Date Of Birth")]
+        [Display(Name = "Fødselsdag")]
         public DateTime? DateOfBirth { get; set; }
-        [Display(Name = "Are you a admin")]
+        [Display(Name = "Er du admin")]
         public bool IsAdmin { get; set; }
+        [Display(Name = "Køn")]
         public string Gender { get; set; }
     }
 
