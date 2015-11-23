@@ -82,7 +82,7 @@ namespace Sunddk.Models
         public string ConfirmPassword { get; set; }
 
         // Dette er noget som jeg selv har tilføjet til koden!!
-        [Display(Name = "Brugernavn")]
+        [Display(Name = "Navn")]
         public string Name { get; set; }
         [Display(Name = "Fødselsdag")]
         public DateTime? DateOfBirth { get; set; }
