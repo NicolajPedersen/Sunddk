@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Sunddk.Models;
+using System.Collections.Generic;
 
 namespace Sunddk.Controllers
 {
@@ -166,6 +167,21 @@ namespace Sunddk.Controllers
                     //return RedirectToAction("Index", "Home");
 
                     //Noget jeg har tilføjet til koden!!
+                    double BMR = 0.0;
+                    int alder = Convert.ToInt16(DateTime.Now.Date.Year) - Convert.ToInt32(model.DateOfBirth.Year);
+
+                    if (model.Gender == "Mand") {
+                        BMR = (66.5 + (13.75 * model.Weight) + (5.003 * model.Height) - (6.775 * alder)) * 4.186;
+                    }
+                    else {
+                        BMR = (655.1 + (9.563 * model.Weight) + (1.850 * model.Height) - (4.676 * alder)) * 4.186;
+                    }
+
+                    var measurment = new Models.Measurement();
+                    measurment.Date = DateTime.Now.Date;
+                    measurment.Weight = model.Weight;
+                    measurment.Height = model.Height;
+                    measurment.BMR = BMR;
 
                     using (var db = new Models.MealPlanContext()) {
                         var Person = new Models.Person();
@@ -175,12 +191,13 @@ namespace Sunddk.Controllers
                         Person.Gender = model.Gender;
                         Person.Email = model.Email;
                         Person.Password = model.Password;
+                        Person.Measurements = new List<Models.Measurement>();
+                        Person.Measurements.Add(measurment);
                         db.Persons.Add(Person);
                         db.SaveChanges();
                     }
-                    return RedirectToAction("Index", "Home");
 
-                    //return RedirectToAction("UserProfile", "User");
+                    return RedirectToAction("UserProfile", "User");
                 }
                 AddErrors(result);
             }

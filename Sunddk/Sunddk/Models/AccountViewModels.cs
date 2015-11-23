@@ -85,11 +85,15 @@ namespace Sunddk.Models
         [Display(Name = "Navn")]
         public string Name { get; set; }
         [Display(Name = "Fødselsdag")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         [Display(Name = "Er du admin")]
         public bool IsAdmin { get; set; }
         [Display(Name = "Køn")]
         public string Gender { get; set; }
+        [Display(Name = "Vægt")]
+        public double Weight { get; set; }
+        [Display(Name = "Højde")]
+        public int Height { get; set; }
     }
 
     public class ResetPasswordViewModel

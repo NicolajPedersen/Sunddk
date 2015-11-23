@@ -16,6 +16,6 @@ namespace Sunddk.Models
         public string Gender { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        List<Measurement> Measurements { get; set; }
+        public List<Measurement> Measurements { get; set; }
     }
 }
