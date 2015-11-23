@@ -24,3 +24,11 @@
 .navbar-inverse .navbar-brand {
     color: white; /*Change color on Application Name*/
 }
+
+.img {
+    background: url('../../Content/Images/sund_dklogo.jpg') no-repeat;
+    background-size:contain;
+    display:block;
+    height:50px;
+    width:115px;
+}

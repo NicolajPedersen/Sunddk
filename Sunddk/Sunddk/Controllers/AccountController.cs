@@ -164,7 +164,23 @@ namespace Sunddk.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //return RedirectToAction("Index", "Home");
-                    return RedirectToAction("CreateUser", "CreateUser", user.Email);
+
+                    //Noget jeg har tilføjet til koden!!
+
+                    using (var db = new Models.MealPlanContext()) {
+                        var Person = new Models.Person();
+                        Person.Name = model.Name;
+                        Person.DateOfBirth = model.DateOfBirth;
+                        Person.IsAdmin = model.IsAdmin;
+                        Person.Gender = model.Gender;
+                        Person.Email = model.Email;
+                        Person.Password = model.Password;
+                        db.Persons.Add(Person);
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("Index", "Home");
+
+                    //return RedirectToAction("UserProfile", "User");
                 }
                 AddErrors(result);
             }
