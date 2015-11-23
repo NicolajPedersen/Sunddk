@@ -3,22 +3,22 @@
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-    color: white;  /*Change rollover cell color here*/
+    color: black;  /*Change rollover cell color here*/
     background-color: transparent;
 }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-    color: white; /*Change rollover cell color here*/
+    color: black; /*Change rollover cell color here*/
 }
 
 .navbar-inverse {
-    background-color: green;  /*Change color on navbar*/
-    border-color: green;
+    background-color: white;  /*Change color on navbar*/
+    border-color: white;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: white;   /*Change text color for list of sites here*/
+    color: black;   /*Change text color for list of sites here*/
 }
 
 .navbar-inverse .navbar-brand {
