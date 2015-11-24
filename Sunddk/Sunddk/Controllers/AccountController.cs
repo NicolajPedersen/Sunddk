@@ -168,15 +168,10 @@ namespace Sunddk.Controllers
                     //return RedirectToAction("Index", "Home");
 
                     //Noget jeg har tilføjet til koden!!
-                    double BMR = 0.0;
-                    int alder = Convert.ToInt16(DateTime.Now.Date.Year) - Convert.ToInt32(model.DateOfBirth.Year);
 
-                    if (model.Gender == "Mand") {
-                        BMR = (66.5 + (13.75 * model.Weight) + (5.003 * model.Height) - (6.775 * alder)) * 4.186;
-                    }
-                    else {
-                        BMR = (655.1 + (9.563 * model.Weight) + (1.850 * model.Height) - (4.676 * alder)) * 4.186;
-                    }
+                    Sunddk.Utilities.Calculate utilitie = new Utilities.Calculate();
+
+                    double BMR = utilitie.CalculateBMR(model.DateOfBirth, model.Gender, model.Weight, model.Height);
 
                     var measurment = new Models.Measurement();
                     measurment.Date = DateTime.Now.Date;
