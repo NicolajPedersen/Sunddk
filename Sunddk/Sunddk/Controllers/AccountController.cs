@@ -81,7 +81,7 @@ namespace Sunddk.Controllers
             {
                 case SignInStatus.Success:
                     //return RedirectToLocal(returnUrl);
-                    return RedirectToAction("UserProfile", "User", new { email = model.Email });
+                    return RedirectToAction("UserProfile", "User", new { Email = model.Email });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -193,7 +193,7 @@ namespace Sunddk.Controllers
                         db.SaveChanges();
                     }
 
-                    return RedirectToAction("UserProfile", "User", new { email = model.Email });
+                    return RedirectToAction("UserProfile", "User", new { Email = model.Email });
                 }
                 AddErrors(result);
             }

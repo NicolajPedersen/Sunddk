@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Sunddk.Models {
     public class ProfileViewModel {
+        public string Email { get; set; }
         [Display(Name = "Navn")]
         public string Name { get; set; }
         [Display(Name = "Fødselsdag")]

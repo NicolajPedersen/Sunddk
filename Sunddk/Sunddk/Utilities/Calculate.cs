@@ -10,11 +10,11 @@ namespace Sunddk.Utilities {
             int Age = Convert.ToInt16(DateTime.Now.Date.Year) - Convert.ToInt32(DateOfBirth.Year);
 
             if (Gender == "Mand") {
-                BMR = (66.5 + (13.75 * Weight) + (5.003 * Height) - (6.775 * Age)) * 4.186;
+                BMR = (66.5 + (13.75 * Weight) + (5.003 * Height) - (6.775 * Age));
                 return BMR;
             }
             else {
-                BMR = (655.1 + (9.563 * Weight) + (1.850 * Height) - (4.676 * Age)) * 4.186;
+                BMR = (655.1 + (9.563 * Weight) + (1.850 * Height) - (4.676 * Age));
                 return BMR;
             }
         }
