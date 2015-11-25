@@ -59,6 +59,7 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APITest.cs" />
+    <Compile Include="MVCTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunddkAPI\SunddkAPI.csproj">
