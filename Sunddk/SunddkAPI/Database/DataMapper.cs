@@ -82,5 +82,17 @@ namespace SunddkAPI.Database
                 CloseDB();
             }
         }
+        public static void DeleteUser(string email)
+        {
+            ConnectDB();
+            ConnectDB();
+            SqlCommand cmd = new SqlCommand("DeletePerson", dbconn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add(new SqlParameter("@Email", email));
+
+            cmd.ExecuteNonQuery();
+            CloseDB();
+        }
     }
 }
