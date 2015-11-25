@@ -25,7 +25,8 @@ namespace Sunddk.Controllers
                 profile.Name = person.Name;
                 profile.DateOfBirth = person.DateOfBirth.Value.Date;
                 profile.Gender = person.Gender;
-                measurements = db.Measurements.First(m => m.PersonId == person.PersonId);
+                DateTime now = DateTime.Now;
+                measurements = db.Measurements.First(m => m.PersonId == person.PersonId && m.Date == now);
                 profile.Weight = measurements.Weight;
                 profile.Height = measurements.Height;
                 profile.BMR = measurements.BMR;
@@ -40,20 +41,16 @@ namespace Sunddk.Controllers
             double BMR = utiliti.CalculateBMR(profile.DateOfBirth, profile.Gender, profile.Weight, profile.Height);
             
             using (var db = new Models.MealPlanContext()) {
-                Person personn = new Person();
+                Person person = new Person();
                 Measurement measurements = new Measurement();
-                //personn = db.Persons.FirstOrDefault(p => p.Email == profile.Email);
-                //personn.Email = profile.Email;
-                //personn.Name = profile.Name;
-                //personn.DateOfBirth = profile.DateOfBirth;
-                //personn.Gender = profile.Gender;
-                //personn.Measurements = new List<Models.Measurement>();
-                //measurements.Weight = profile.Weight;
-                //measurements.Height = profile.Height;
-                //measurements.BMR = BMR;
-                //personn.Measurements.Add(measurements);
-                //db.Persons.Add(personn);
-                //db.SaveChanges();
+                person = db.Persons.FirstOrDefault(p => p.Email == profile.Email);
+                measurements.Date = DateTime.Now;
+                measurements.Weight = profile.Weight;
+                measurements.Height = profile.Height;
+                measurements.BMR = BMR;
+                measurements.PersonId = person.PersonId;
+                db.Measurements.Add(measurements);
+                db.SaveChanges();
 
                 return RedirectToAction("UserProfile", "User", new { Email = profile.Email});
             } 
