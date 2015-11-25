@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunddk", "Sunddk\Sunddk.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunddkAPI", "SunddkAPI\SunddkAPI.csproj", "{C6F04AEE-9DBF-4A6A-9F11-8187731A60DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{75A2C81C-9421-4F62-BE0B-3CBC0D70C7C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C6F04AEE-9DBF-4A6A-9F11-8187731A60DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6F04AEE-9DBF-4A6A-9F11-8187731A60DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6F04AEE-9DBF-4A6A-9F11-8187731A60DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A2C81C-9421-4F62-BE0B-3CBC0D70C7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A2C81C-9421-4F62-BE0B-3CBC0D70C7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A2C81C-9421-4F62-BE0B-3CBC0D70C7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A2C81C-9421-4F62-BE0B-3CBC0D70C7C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

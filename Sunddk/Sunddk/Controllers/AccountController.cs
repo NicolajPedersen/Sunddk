@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Sunddk.Models;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Sunddk.Controllers
 {
@@ -189,10 +190,29 @@ namespace Sunddk.Controllers
                         Person.Password = model.Password;
                         Person.Measurements = new List<Models.Measurement>();
                         Person.Measurements.Add(measurment);
-                        db.Persons.Add(Person);
-                        db.SaveChanges();
-                    }
+                        //db.Persons.Add(Person);
+                        //db.SaveChanges();
 
+                        string uri = "http://localhost:52006/api/Person";
+                        string parameters =
+                            "name=" + Person.Name +
+                            "&dateOfBirth=" + Person.DateOfBirth +
+                            "&isAdmin=" + Person.IsAdmin +
+                            "&gender=" + Person.Gender +
+                            "&email=" + Person.Email +
+                            "&password=" + Person.Password +
+                            "&date=" + Person.Measurements[0].Date +
+                            "&weight=" + Person.Measurements[0].Weight +
+                            "&height=" + Person.Measurements[0].Height +
+                            "&bmr=" + Person.Measurements[0].BMR;
+
+                        using (WebClient client = new WebClient())
+                        {
+                           client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                           client.UploadString(uri, parameters);
+                        }
+
+                    }
                     return RedirectToAction("UserProfile", "User", new { email = model.Email });
                 }
                 AddErrors(result);

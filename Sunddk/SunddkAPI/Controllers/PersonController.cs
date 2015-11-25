@@ -13,7 +13,7 @@ namespace SunddkAPI.Controllers
     {
         Repository respo; 
         [HttpPost]
-        public bool CreateUser(string name, DateTime dateOfBirth, bool isAdmin, string gender, string email, string password, DateTime date, double weight, int height, double bmr)
+        public bool CreateUser(string name, DateTime? dateOfBirth, bool isAdmin, string gender, string email, string password, DateTime date, double weight, int height, double bmr)
         {
             Person person = new Person();
             person.Name = name;
@@ -32,5 +32,11 @@ namespace SunddkAPI.Controllers
             return respo.CreateUser(person);
              
         }
+        [HttpPost]
+        public void Test(string name)
+        {
+            DataMapper.Test(name);
+        }
+
     }
 }
