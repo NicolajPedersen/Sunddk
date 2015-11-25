@@ -22,6 +22,7 @@ namespace SunddkAPI.Controllers
             person.Gender = gender;
             person.Email = email;
             person.Password = password;
+            person.Measurements.Add(new Measurement());
             person.Measurements[0].Date = date;
             person.Measurements[0].Weight = weight;
             person.Measurements[0].Height = height;

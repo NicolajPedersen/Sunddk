@@ -57,18 +57,20 @@ namespace SunddkAPI.Database
             try
             {
                 ConnectDB();
+                SqlCommand cmd = new SqlCommand("CreatePerson", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                string sqlInput = string.Format("Declare @personId int" +
-                                   "Insert into People" +
-                                   "(Name, DateOfBirth, IsAdmin, Gender, Email, Password)" +
-                                   "@personId = Inserted.PersonId" +
-                                   "Values({0},{1},{2},{3},{4},{5})", person.Name, person.DateOfBirth, person.IsAdmin, person.Gender, person.Email, person.Password) +
-                                   string.Format("\nInsert into Measurements" +
-                                   "(Date, Weight, Height, BMR, PersonId)" +
-                                   "({0}, {1}, {2}, {3}, {4}", person.Measurements[0].Date, person.Measurements[0].Weight, person.Measurements[0].Height, person.Measurements[0].Height + "@personId"); 
-                                    
-                SqlCommand cmd = new SqlCommand(sqlInput, dbconn);
-
+                cmd.Parameters.Add(new SqlParameter("@Name", person.Name));
+                cmd.Parameters.Add(new SqlParameter("@DateOfBirth", person.DateOfBirth));
+                cmd.Parameters.Add(new SqlParameter("@IsAdmin", person.IsAdmin));
+                cmd.Parameters.Add(new SqlParameter("@Gender", person.Gender));
+                cmd.Parameters.Add(new SqlParameter("@Email", person.Email));
+                cmd.Parameters.Add(new SqlParameter("@Password", person.Password));
+                cmd.Parameters.Add(new SqlParameter("@Weight", person.Measurements[0].Weight));
+                cmd.Parameters.Add(new SqlParameter("@Height", person.Measurements[0].Height));
+                cmd.Parameters.Add(new SqlParameter("@BMR", person.Measurements[0].BMR));
+                cmd.Parameters.Add(new SqlParameter("@Date", person.Measurements[0].Date));
+                
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)

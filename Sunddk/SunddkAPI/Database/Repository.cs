@@ -13,16 +13,21 @@ namespace SunddkAPI.Database
         public bool CreateUser(Person person)
         {
             bool isCreated = false;
-
+            bool isExistent = false;
             List<Person> PersonList = DataMapper.GetUsers();
 
             foreach (Person p in PersonList)
             {
-                if(p.Email != person.Email)
+                if(p.Email == person.Email)
                 {
-                    DataMapper.CreateUser(person);
-                    isCreated = true;
+                    isExistent = true;
                 }
+            }
+
+            if (!isExistent)
+            {
+                DataMapper.CreateUser(person);
+                isCreated = true;
             }
             return isCreated;
         }

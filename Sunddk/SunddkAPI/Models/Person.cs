@@ -14,8 +14,12 @@ namespace SunddkAPI.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public PersonMealPlan PersonMealPlanLine { get; set; }
+        public List<Measurement> Measurements { get; set; }
 
-        public List<Measurement> Measurements = new List<Measurement>();
+        public Person()
+        {
+            Measurements = new List<Measurement>();
+        }
 
 
     }
