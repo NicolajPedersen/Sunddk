@@ -12,17 +12,24 @@ namespace Sunddk.Controllers
         // GET: Admin
         [HttpGet]
         public ActionResult CreateMealPlan(string name) {
-            using (var db = new Models.MealPlanContext()) {
-                MealPlans mealplan = new MealPlans();
-                MealPlan mplan = new MealPlan();
-                mplan = db.MealPlans.First(m => m.Name == mplan.Name);
-                mealplan.mealPlan.MealPlanId = mplan.MealPlanId;
-                mealplan.mealPlan.Name = mplan.Name;
-                mealplan.mealPlan.MaxCalories = mplan.MaxCalories;
-                mealplan.mealPlan.Description = mplan.Description;
+            if (name != null) {
+                using (var db = new Models.MealPlanContext()) {
+                    MealPlans mealplan = new MealPlans();
+                    MealPlan mplan = new MealPlan();
+                    mplan = db.MealPlans.First(m => m.Name == mplan.Name);
+                    mealplan.mealPlan.MealPlanId = mplan.MealPlanId;
+                    mealplan.mealPlan.Name = mplan.Name;
+                    mealplan.mealPlan.MaxCalories = mplan.MaxCalories;
+                    mealplan.mealPlan.Description = mplan.Description;
 
+                    return View(mealplan);
+                }
+            }
+            else {
+                MealPlans mealplan = new MealPlans();
                 return View(mealplan);
             }
+            
         }
 
         [HttpPost]

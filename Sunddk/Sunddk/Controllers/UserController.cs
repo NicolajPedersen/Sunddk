@@ -25,8 +25,8 @@ namespace Sunddk.Controllers
                 profile.Name = person.Name;
                 profile.DateOfBirth = person.DateOfBirth.Value.Date;
                 profile.Gender = person.Gender;
-                DateTime now = DateTime.Now;
-                measurements = db.Measurements.First(m => m.PersonId == person.PersonId && m.Date == now);
+                DateTime now = DateTime.Now.Date;
+                measurements = db.Measurements.First(m => m.PersonId == person.PersonId /*&& m.Date == now*/);
                 profile.Weight = measurements.Weight;
                 profile.Height = measurements.Height;
                 profile.BMR = measurements.BMR;
@@ -54,6 +54,16 @@ namespace Sunddk.Controllers
 
                 return RedirectToAction("UserProfile", "User", new { Email = profile.Email});
             } 
+        }
+
+        [HttpGet]
+        public ActionResult NewMealPlan() {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ExsistingMealPlan() {
+            return View();
         }
     }
 }
