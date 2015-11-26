@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace WpfApplication1
 {
@@ -21,30 +24,26 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Dette bruges til personlig læring. Den er beregnes ikke som en del af projekt 3.!!!
         public MainWindow()
         {
             InitializeComponent();
         }
 
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            WebClient client = new WebClient();
-            //string parameters =
-            //    "name=" + "wpf" +
-            //    "&dateOfBirth=" + DateTime.Now +
-            //    "&isAdmin=" + false +
-            //    "&gender=" + "Mand" +
-            //    "&email=" + "wpf@wpf.dk" +
-            //    "&password=" + "Wpf1234" +
-            //    "&date=" + DateTime.Now +
-            //    "&weight=" + 70.5 +
-            //    "&height=" + 170 +
-            //    "&bmr=" + 455;
-            string parameters = "name=PhillipV";
-            client.Headers["Content-Type"] = "application/json";
-            string uri = "http://localhost:52006/api/Person";
-            client.UploadString(uri, parameters);
+            //Dette bruges til personlig læring. Den er beregnes ikke som en del af projekt 3.!!!
+            Person person = new Person();
+            person.Name = "Philio";
+            var jsonPerson = JsonConvert.SerializeObject(person);
             
+            WebClient webClient = new WebClient();
+            webClient.Headers["Content-Type"] = "application/json";
+            string uriAdr = "http://localhost:52006/api/Person/";
+            string response = webClient.UploadString(uriAdr, "POST", jsonPerson);
+
+
         }
     }
 }

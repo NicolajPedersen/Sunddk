@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Sunddk.Models;
 using System.Collections.Generic;
 using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Sunddk.Controllers
 {
@@ -193,24 +194,14 @@ namespace Sunddk.Controllers
                         //db.Persons.Add(Person);
                         //db.SaveChanges();
 
-                        string uri = "http://localhost:52006/api/Person";
-                        string parameters =
-                            "name=" + Person.Name +
-                            "&dateOfBirth=" + Person.DateOfBirth +
-                            "&isAdmin=" + Person.IsAdmin +
-                            "&gender=" + Person.Gender +
-                            "&email=" + Person.Email +
-                            "&password=" + Person.Password +
-                            "&date=" + Person.Measurements[0].Date +
-                            "&weight=" + Person.Measurements[0].Weight +
-                            "&height=" + Person.Measurements[0].Height +
-                            "&bmr=" + Person.Measurements[0].BMR;
+                        JavaScriptSerializer jser = new JavaScriptSerializer();
+                        string uploadJson = jser.Serialize(Person);
 
-                        using (WebClient client = new WebClient())
-                        {
-                           client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                           client.UploadString(uri, parameters);
-                        }
+                        WebClient webClient = new WebClient();
+                        webClient.Headers["Content-Type"] = "application/json";
+                        string uriAdr = "http://localhost:52006/api/Person/";
+                        
+                        string response = webClient.UploadString(uriAdr, "POST", uploadJson);
 
                     }
                     return RedirectToAction("UserProfile", "User", new { email = model.Email });
