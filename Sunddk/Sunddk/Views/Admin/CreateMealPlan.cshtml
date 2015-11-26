@@ -2,6 +2,12 @@
 
 @{
     ViewBag.Title = "CreateMealPlan";
+    List<SelectListItem> list = new List<SelectListItem>();
+    list.Add(new SelectListItem { Text = "--Vælg--" });
+    list.Add(new SelectListItem { Text = "Morgenmad" });
+    list.Add(new SelectListItem { Text = "Frokost" });
+    list.Add(new SelectListItem { Text = "Aftenmad" });
+    list.Add(new SelectListItem { Text = "Mellemmåltid" });
 }
 
 <h2>Opret en Kostplan med tilhørende måltider:</h2>
@@ -54,10 +60,12 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.meal.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.meal.Name, new { @class = "col-md-2 control-label" })
+            @*@Html.LabelFor(model => model.meal.Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.meal.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.meal.Name, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.meal.Name, list)
+                @*@Html.EditorFor(model => model.meal.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.meal.Name, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
