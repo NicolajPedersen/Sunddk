@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Sunddk.Models;
 using System.Collections.Generic;
+using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Sunddk.Controllers
 {
@@ -189,10 +191,19 @@ namespace Sunddk.Controllers
                         Person.Password = model.Password;
                         Person.Measurements = new List<Models.Measurement>();
                         Person.Measurements.Add(measurment);
-                        db.Persons.Add(Person);
-                        db.SaveChanges();
-                    }
+                        //db.Persons.Add(Person);
+                        //db.SaveChanges();
 
+                        JavaScriptSerializer jser = new JavaScriptSerializer();
+                        string uploadJson = jser.Serialize(Person);
+
+                        WebClient webClient = new WebClient();
+                        webClient.Headers["Content-Type"] = "application/json";
+                        string uriAdr = "http://localhost:52006/api/Person/";
+                        
+                        string response = webClient.UploadString(uriAdr, "POST", uploadJson);
+
+                    }
                     return RedirectToAction("UserProfile", "User", new { email = model.Email });
                 }
                 AddErrors(result);

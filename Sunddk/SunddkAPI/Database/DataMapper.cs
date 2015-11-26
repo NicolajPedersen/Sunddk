@@ -52,6 +52,28 @@ namespace SunddkAPI.Database
             }
             return PersonList;
         }
+
+        internal static void Test(string name)
+        {
+            try
+            {
+                ConnectDB();
+                string sqlInput = @"Insert into People (Name, IsAdmin) values (@name, 0)";
+                SqlCommand cmd = new SqlCommand(sqlInput, dbconn);
+                cmd.Parameters.AddWithValue("@name", name);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+        }
+
         public static void CreateUser(Person person)
         {
             try
