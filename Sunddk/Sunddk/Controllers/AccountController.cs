@@ -81,12 +81,12 @@ namespace Sunddk.Controllers
             {
                 case SignInStatus.Success:
                     //return RedirectToLocal(returnUrl);
-                    if (model.Email == "admin@admin.com") {
-                        return RedirectToAction("AdminProfile", "Admin");
-                    }
-                    else {
+                    //if (model.Email == "Admin@admin.com") { //Virker ikke
+                    //    return RedirectToAction("AdminProfile", "Admin");
+                    //}
+                    //else {
                         return RedirectToAction("UserProfile", "User", new { Email = model.Email });
-                    }
+                    //}
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -427,7 +427,8 @@ namespace Sunddk.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

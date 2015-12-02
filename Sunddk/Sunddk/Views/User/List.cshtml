@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Sunddk.Models.MealPlan>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+@Styles.Render("~/Content/User.css")
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxCalories)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxCalories)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Vælg", "Categories", "User", new { id=item.MealPlanId }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.MealPlanId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MealPlanId })*@
+        </td>
+    </tr>
+}
+
+</table>
+
+<div id="mealPlanFeed">
+    <div class="mealPlan img-rounded">
+        <div class="img-mealPlan">
+            <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
+        </div>
+        <div class="mealPlan-info">
+            <h3>Name</h3>
+            <h4>Max Calories</h4>
+            <p>Description</p>
+        </div>
+        <div class="btn-bottom">
+            @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="mealPlan img-rounded">
+        <div class="img-mealPlan">
+            <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
+        </div>
+        <div class="btn-bottom">
+            @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="mealPlan img-rounded">
+        <div class="img-mealPlan">
+            <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
+        </div>
+        <div class="btn-bottom">
+            @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="mealPlan img-rounded">
+        <div class="img-mealPlan">
+            <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
+        </div>
+        <div class="btn-bottom">
+            @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="mealPlan img-rounded">
+        <div class="img-mealPlan">
+            <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
+        </div>
+        <div class="btn-bottom">
+            @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="mealPlan img-rounded">
+        <div class="img-mealPlan">
+            <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
+        </div>
+        <div class="btn-bottom">
+            @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>

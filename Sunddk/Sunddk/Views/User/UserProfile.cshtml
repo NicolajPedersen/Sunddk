@@ -4,7 +4,7 @@
     ViewBag.Title = "UserProfile";
 }
 
-<h2>UserProfile</h2>
+<h2>Bruger Profil</h2>
 
 @using (Html.BeginForm("UserProfile", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -73,9 +73,14 @@
     </div>
 }
 
-@using (Html.BeginForm("NewMealPlann", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
-    <div>
-        <input type="submit" value="Vælg kostplan" class="btn btn-default" />
+@using (Html.BeginForm("List", "User", FormMethod.Get, new { @class = "form-horizontal", role = "form" })) { //Skal det ikke være sådan at her skal man have mulighed for at vælge hvilke måltider man vil have til morgenmad, middagsmad og aftens mad og på den måde sætte sin egen kostplan sammen og de måltider man får som valg muligheder er inde for det antal kalorier man må få om ugen. Vælg måltid skal se ud lige som på slide 2 i powerpoint.
+    //Når man har valgt hvilken kostplan man vil på for at tabe sig et antal killo, får man af vide hvilke måltider der tilhører den kostplan, og her fra kan man så vælge hvilke måltider man vil have til de enkelte tidspunkter på dagen.
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <input type="submit" value="Ny kostplan" class="btn btn-default" />
+            </div>
+        </div>
     </div>
 }
 

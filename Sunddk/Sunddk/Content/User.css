@@ -1,0 +1,52 @@
+﻿body {
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#mealPlanFeed {
+    height: 100%;
+    width: 100%;
+    float: left;
+    clear: both;
+    overflow: hidden;
+}
+
+.mealPlan {
+    height: 300px;
+    width: calc(33.3% - 10px);
+    float: left;
+    position: relative;
+    background: green;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.img-mealPlan {
+    align-self: center;
+    margin: 10px 20px 0px 20px;
+    position: relative;
+    float: left;
+}
+
+div img { /*Responsive*/
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+
+.btn-bottom {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 40px);
+    margin: 0px 0px 10px 20px;
+}
+
+.mealPlan-info {
+    float: left;
+    margin-left: 20px;
+}

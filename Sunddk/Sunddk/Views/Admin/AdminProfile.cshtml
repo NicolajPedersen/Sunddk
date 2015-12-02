@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "AdminProfile";
+}
+
+<h2>Admin Profil</h2>
+
+<p>@Html.ActionLink("Opert Ny Kostplan", "CreateMealPlan", "Admin", new { @class = "btn-admin btn-default" })</p>
+<p>@Html.ActionLink("Opdater Kostplan", "OpdateMealPlan", "Admin", new { @class = "btn-admin btn-default" })</p>
+<p>@Html.ActionLink("Slet Kostplan", "DeleteMealPlan", "Admin", new { @class = "btn-admin btn-default" })</p>
+<p>@Html.ActionLink("Bruger Statestik", "UserStatistik", "Admin", new { @class = "btn-admin btn-default" })</p>
