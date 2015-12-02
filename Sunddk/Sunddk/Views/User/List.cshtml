@@ -35,9 +35,14 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Vælg", "Categories", "User", new { id=item.MealPlanId }) |
+            @Html.DisplayFor(modelItem => item.MealPlanId)
+        </td>
+        <td>
+            @Html.ActionLink("Se", "Categories", new { MealPlanId = item.MealPlanId }) |
+            @Html.ActionLink("Vælg", "NewMealPlan", new { MealPlanId = item.MealPlanId, Email = @ViewBag.Email})
             @*@Html.ActionLink("Details", "Details", new { id=item.MealPlanId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.MealPlanId })*@
+            @* Man kunne senere lave det sådan at man selv kunne lave sin egen MealPlan, ved selv at vælge de måltide i de forskellige typer som man gerne vil have også oprette en MealPlan selv og koble den på personen *@
         </td>
     </tr>
 }
