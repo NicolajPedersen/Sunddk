@@ -11,26 +11,21 @@ namespace SunddkAPI.Controllers
 {
     public class PersonController : ApiController
     {
-        Repository respo; 
+        Repository respo;
         [HttpPost]
-        public bool CreateUser(string name, DateTime dateOfBirth, bool isAdmin, string gender, string email, string password, DateTime date, double weight, int height, double bmr)
+        public bool CreateUser([FromBody] Person person)
         {
-            Person person = new Person();
-            person.Name = name;
-            person.DateOfBirth = dateOfBirth;
-            person.IsAdmin = isAdmin;
-            person.Gender = gender;
-            person.Email = email;
-            person.Password = password;
-            person.Measurements.Add(new Measurement());
-            person.Measurements[0].Date = date;
-            person.Measurements[0].Weight = weight;
-            person.Measurements[0].Height = height;
-            person.Measurements[0].BMR = bmr;
-
             respo = new Repository();
             return respo.CreateUser(person);
-             
+
         }
+        //hej
+        //Bruges til WPF testing!
+        //[HttpPost]
+        //public void POSTTest([FromBody] Person person)
+        //{
+        //    DataMapper.Test(person.Name);
+        //}
+
     }
 }
