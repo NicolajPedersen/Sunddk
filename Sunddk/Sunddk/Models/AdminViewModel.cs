@@ -19,6 +19,7 @@ namespace Sunddk.Models {
     }
 
     public class MealViewModel {
+        public int MealPlanId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double Calories { get; set; }

@@ -56,13 +56,28 @@ namespace Sunddk.Controllers
             } 
         }
 
+        //Er bare en test!!
         [HttpGet]
-        public ActionResult NewMealPlan() {
+        public ActionResult List() {
+            List<MealPlan> mealplans = new List<MealPlan>();
+            using (var db = new Models.MealPlanContext()) {
+                mealplans = db.MealPlans.ToList();
+            }
+            return View(mealplans);
+        }
+
+        [HttpGet]
+        public ActionResult Categories(/*int MealPlanId*/) { //Skal bruge mealplanid til at hente de meals ud som der er koblet til den mealplan (og evt sortere dem efter kategorier)
             return View();
         }
 
         [HttpGet]
-        public ActionResult ExsistingMealPlan() {
+        public ActionResult Meals() {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CurrentMealPlan() {
             return View();
         }
     }

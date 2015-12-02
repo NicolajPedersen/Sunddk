@@ -9,9 +9,10 @@ namespace Sunddk.Controllers
 {
     public class AdminController : Controller
     {
+        private static List<Meal> meals = new List<Meal>();
         // GET: Admin
         [HttpGet]
-        public ActionResult CreateMealPlan(string name) {
+        public ActionResult CreateMealPlanTest(string name) {
             if (name != null) {
                 using (var db = new Models.MealPlanContext()) {
                     MealPlans mealplan = new MealPlans();
@@ -33,7 +34,7 @@ namespace Sunddk.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateMealPlan(MealPlans mealplan) {
+        public ActionResult CreateMealPlanTest(MealPlans mealplan) {
             if (mealplan.meal == null) {
                 using (var db = new Models.MealPlanContext()) {
                     MealPlan mplan = new MealPlan();
@@ -64,7 +65,7 @@ namespace Sunddk.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateMeal(MealPlans meal) {
+        public ActionResult CreateMealTest(MealPlans meal) {
             using (var db = new Models.MealPlanContext()) {
                 Meal Meal = new Meal();
                 MealPlan MealPlan = new MealPlan();
@@ -82,6 +83,82 @@ namespace Sunddk.Controllers
 
                 return RedirectToAction("CreateMealPlan", "Admin", new { Mealplans = meal });
             }
+        }
+
+        [HttpGet]
+        public ActionResult AdminProfile() {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CreateMealPlan() {
+            MealPlanViewModel mealPlan = new MealPlanViewModel();
+
+            return View(mealPlan);
+        }
+
+        [HttpPost]
+        public ActionResult CreateMealPlan(MealPlanViewModel mealPlanView) {
+            MealPlan mealPlan = new MealPlan();
+            using (var db = new Models.MealPlanContext()) {
+                mealPlan.Name = mealPlanView.Name;
+                mealPlan.MaxCalories = mealPlanView.MaxCalories;
+                mealPlan.Description = mealPlanView.Description;
+                db.MealPlans.Add(mealPlan);
+                db.SaveChanges();
+
+                mealPlan = db.MealPlans.First(m => m.Name == mealPlanView.Name);
+            }
+                return RedirectToAction("CreateMeal", "Admin", new { MealPlanId = mealPlan.MealPlanId });
+        }
+
+        [HttpGet]
+        public ActionResult CreateMeal(int mealPlanId) {
+            MealViewModel meal = new MealViewModel();
+            meal.MealPlanId = mealPlanId;
+
+            return View(meal);
+        }
+
+        [HttpPost]
+        public ActionResult CreateMeal(MealViewModel mealView) {
+            Meal meal = new Meal();
+            MealPlan mealPlan = new MealPlan();
+            using (var db = new Models.MealPlanContext()) {
+                mealPlan = db.MealPlans.First(m => m.MealPlanId == mealView.MealPlanId);
+
+                meal.Name = mealView.Name;
+                meal.Description = mealView.Description;
+                meal.Calories = mealView.Calories;
+                meal.Weight = mealView.Weight;
+                meal.MealPlans = new List<MealPlan>();
+                meal.MealPlans.Add(mealPlan);
+                db.Meals.Add(meal);
+                db.SaveChanges();
+
+                meal = db.Meals.First(m => m.Name == mealView.Name);
+                meals.Add(meal);
+            }
+            return RedirectToAction("CreateMeal", "Admin", new { MealPlanId = mealView.MealPlanId});
+        }
+
+        //[HttpGet]
+        //public ActionResult Done(int MealPlanId) {
+        //    using (var db = new MealPlanContext()) {
+        //        MealPlan mealPlan = new MealPlan();
+        //        mealPlan = db.MealPlans.First(m => m.MealPlanId == MealPlanId);
+        //        foreach(Meal m in meals) {
+        //            mealPlan.Meals = new List<Meal>();
+        //            mealPlan.Meals.Add(m);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //    return RedirectToAction("AdminProfile", "Admin");
+        //}
+
+        [HttpGet]
+        public ActionResult Done() {
+            return RedirectToAction("AdminProfile", "Admin");
         }
     }
 }
