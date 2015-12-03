@@ -57,6 +57,7 @@ namespace Sunddk.Controllers
         }
 
         //Er bare en test!!
+        //CM07 #FB03
         [HttpGet]
         public ActionResult List(string email) {
             List<MealPlan> mealplans = new List<MealPlan>();
@@ -66,7 +67,8 @@ namespace Sunddk.Controllers
             }
             return View(mealplans);
         }
-
+        
+        //CM07 #FB03
         [HttpPost]
         public ActionResult List(int mealPlanId, string email) {
             PersonMealPlan personMealPlan = new PersonMealPlan();
@@ -87,6 +89,7 @@ namespace Sunddk.Controllers
             }
         }
 
+        //CM07 #FB03
         [HttpGet]
         public ActionResult Categories(int mealPlanId, string email) { //Skal bruge mealplanid til at hente de meals ud som der er koblet til den mealplan (og evt sortere dem efter kategorier)
             ViewBag.MealPlanId = mealPlanId;
@@ -94,6 +97,7 @@ namespace Sunddk.Controllers
             return View();
         }
 
+        //CM07 #FB03
         [HttpGet]
         public ActionResult Meals(string type, string mealPlanId) {
             ViewBag.Type = type;
@@ -116,6 +120,7 @@ namespace Sunddk.Controllers
             return View(meals);
         }
 
+        //CM07 #FB03
         [HttpGet]
         public ActionResult CurrentMealPlan(string email) {
             PersonMealPlan personMealPlan = new PersonMealPlan();

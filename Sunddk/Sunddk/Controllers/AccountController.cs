@@ -151,6 +151,7 @@ namespace Sunddk.Controllers
 
         //
         // POST: /Account/Register
+        //CM06 #FB02
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
