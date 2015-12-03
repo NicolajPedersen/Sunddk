@@ -67,9 +67,30 @@ namespace Sunddk.Controllers
             return View(mealplans);
         }
 
+        [HttpPost]
+        public ActionResult List(int mealPlanId, string email) {
+            PersonMealPlan personMealPlan = new PersonMealPlan();
+            Person person = new Person();
+            MealPlan mealPlan = new MealPlan();
+            using (var db = new Models.MealPlanContext()) {
+                person = db.Persons.First(p => p.Email == email);
+                mealPlan = db.MealPlans.First(m => m.MealPlanId == mealPlanId);
+                personMealPlan.BeginDate = DateTime.Now.Date;
+                personMealPlan.EndDate = DateTime.Now.Date;
+                personMealPlan.IsActive = true;
+                personMealPlan.MealPlan = mealPlan;
+                personMealPlan.Person = person;
+                db.PersonMealPlans.Add(personMealPlan);
+                db.SaveChanges();
+
+                return RedirectToAction("UserProfile", "User", new { Email = email });
+            }
+        }
+
         [HttpGet]
-        public ActionResult Categories(int mealPlanId) { //Skal bruge mealplanid til at hente de meals ud som der er koblet til den mealplan (og evt sortere dem efter kategorier)
+        public ActionResult Categories(int mealPlanId, string email) { //Skal bruge mealplanid til at hente de meals ud som der er koblet til den mealplan (og evt sortere dem efter kategorier)
             ViewBag.MealPlanId = mealPlanId;
+            ViewBag.Email = email;
             return View();
         }
 
@@ -95,28 +116,13 @@ namespace Sunddk.Controllers
             return View(meals);
         }
 
-        [HttpPost]
-        public ActionResult NewMealPlan(int mealPlanId, string email) {
-            PersonMealPlan personMealPlan = new PersonMealPlan();
-            Person person = new Person();
-            MealPlan mealPlan = new MealPlan();
-            using (var db = new Models.MealPlanContext()) {
-                person = db.Persons.First(p => p.Email == email);
-                mealPlan = db.MealPlans.First(m => m.MealPlanId == mealPlanId);
-                personMealPlan.BeginDate = DateTime.Now.Date;
-                personMealPlan.EndDate = default(DateTime);
-                personMealPlan.IsActive = true;
-                personMealPlan.MealPlan = mealPlan;
-                personMealPlan.Person = person;
-                db.PersonMealPlans.Add(personMealPlan);
-                db.SaveChanges();
-            }
-            return RedirectToAction("UserProfile", "User", new { Email =  email});
-        }
-
         [HttpGet]
-        public ActionResult CurrentMealPlan() {
-            return View();
+        public ActionResult CurrentMealPlan(string email) {
+            PersonMealPlan personMealPlan = new PersonMealPlan();
+            using (var db = new Models.MealPlanContext()) {
+                personMealPlan = db.PersonMealPlans.First(pmp => pmp.Person.Email == email && pmp.IsActive == true);
+            }
+            return View(personMealPlan);
         }
     }
 }

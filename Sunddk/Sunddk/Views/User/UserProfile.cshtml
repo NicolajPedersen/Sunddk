@@ -79,7 +79,18 @@
         <div class="col-md-offset-2 col-md-10">
             @Html.HiddenFor(model => model.Email, new { id = "natureOfVisitField", Value = @Model.Email })
             <div>
-                <input type="submit" value="Ny kostplan" class="btn btn-default" />
+                <input type="submit" value="Ny Kostplan" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("CurrentMealPlan", "User", FormMethod.Get, new { @class = "form-horizontal", role = "form" })) { 
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.HiddenFor(model => model.Email, new { id = "natureOfVisitField", Value = @Model.Email })
+            <div>
+                <input type="submit" value="Nuværende Kostplan" class="btn btn-default" />
             </div>
         </div>
     </div>
