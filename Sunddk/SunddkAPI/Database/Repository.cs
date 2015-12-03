@@ -10,6 +10,7 @@ namespace SunddkAPI.Database
 {
     class Repository
     {
+        //CM06 #FB02
         public bool CreateUser(Person person)
         {
             bool isCreated = false;
