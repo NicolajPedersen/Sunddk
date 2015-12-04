@@ -5,8 +5,12 @@
 
 <h2>Categories</h2>
 
-<p>@Html.ActionLink("Morgenmad", "Meals", "User", new { id = ""}, new { @class = "btn btn-default" })</p>
-<p>@Html.ActionLink("Middagsmad", "", "", new { @class = "btn btn-default" })</p>
-<p>@Html.ActionLink("Aftensmad", "", "", new { @class = "btn btn-default" })</p>
-<p>@Html.ActionLink("Mellemmåltid", "", "", new { @class = "btn btn-default" })</p>
+<p>
+    @Html.ActionLink("Back to List", "List", new { Email = ViewBag.Email })
+</p>
+
+<p>@Html.ActionLink("Morgenmad", "Meals", "User", new { Type = "Morgenmad", MealPlanId = @ViewBag.MealPlanId}, new { @class = "btn btn-default" })</p>
+<p>@Html.ActionLink("Middagsmad", "Meals","User", new { Type = "Middagsmad", MealPlanId = @ViewBag.MealPlanId }, new { @class = "btn btn-default" })</p>
+<p>@Html.ActionLink("Aftensmad", "Meals", "User", new { Type = "Aftensmad", MealPlanId = @ViewBag.MealPlanId }, new { @class = "btn btn-default" })</p>
+<p>@Html.ActionLink("Mellemmåltid", "Meals", "User", new { Type = "Mellemmåltid", MealPlanId = @ViewBag.MealPlanId }, new { @class = "btn btn-default" })</p>
 

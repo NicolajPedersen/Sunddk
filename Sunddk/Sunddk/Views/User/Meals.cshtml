@@ -1,13 +1,17 @@
-﻿@model IEnumerable<Sunddk.Models.MealViewModel>
+﻿@model IEnumerable<Sunddk.Models.Meal>
 
 @{
-    ViewBag.Title = "Meals";
+    ViewBag.Title = ViewBag.Type;
+    int MealPlanId = 0;
+    foreach (var m in Model) {
+        MealPlanId = m.MealPlansId[0];
+    }
 }
 
-<h2>Meals</h2>
+<h2>@ViewBag.Type</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Back to Categories", "Categories", new { MealPlanId = MealPlanId})
 </p>
 <table class="table">
     <tr>
@@ -41,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
-                @Html.ActionLink("Vælg", "Edit", new { id = item.MealPlanId }) |
+                @*@Html.ActionLink("Vælg", "AddToNewUserMealPlan", new { MealId = item.MealId })*@
                 @*@Html.ActionLink("Details", "Details", new { id=item.MealPlanId }) |
                     @Html.ActionLink("Delete", "Delete", new { id=item.MealPlanId })*@
             </td>

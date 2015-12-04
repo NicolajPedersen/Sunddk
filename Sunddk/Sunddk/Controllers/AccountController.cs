@@ -81,12 +81,7 @@ namespace Sunddk.Controllers
             {
                 case SignInStatus.Success:
                     //return RedirectToLocal(returnUrl);
-                    //if (model.Email == "Admin@admin.com") { //Virker ikke
-                    //    return RedirectToAction("AdminProfile", "Admin");
-                    //}
-                    //else {
-                        return RedirectToAction("UserProfile", "User", new { Email = model.Email });
-                    //}
+                    return RedirectToAction("UserProfile", "User", new { Email = model.Email });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -151,6 +146,7 @@ namespace Sunddk.Controllers
 
         //
         // POST: /Account/Register
+        //CM06 #FB02
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -158,7 +154,7 @@ namespace Sunddk.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Name, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
