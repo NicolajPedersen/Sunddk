@@ -11,7 +11,7 @@
 <h2>@ViewBag.Type</h2>
 
 <p>
-    @Html.ActionLink("Back to Categories", "Categories", new { MealPlanId = MealPlanId})
+    @Html.ActionLink("Back to Categories", "Categories", new { MealPlanId = MealPlanId, Email = @ViewBag.Email})
 </p>
 <table class="table">
     <tr>
@@ -45,6 +45,9 @@
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
+                <div>
+                    <a data-meal-id="@item.MealId" data-person-id="@ViewBag.Email" class="btn-admin btn-default btn-add-to-basket">Add to basket</a>
+                </div>
                 @*@Html.ActionLink("Vælg", "AddToNewUserMealPlan", new { MealId = item.MealId })*@
                 @*@Html.ActionLink("Details", "Details", new { id=item.MealPlanId }) |
                     @Html.ActionLink("Delete", "Delete", new { id=item.MealPlanId })*@
@@ -53,5 +56,44 @@
     }
 
 </table>
+
+@section scripts{
+    <script>
+
+        (function($) {
+
+            $('.btn-add-to-basket').on('click', function () {
+
+                var $this = $(this);
+                var mealId = $this.data('meal-id');
+                var email = $this.data('person-id');
+
+                var poster = $.ajax({
+                    url: '/User/AddtoBasket',
+                    type: 'post',
+                    data: {
+                        mealId: mealId,
+                        email: email
+                    }
+                });
+
+                poster.done(function() {
+                    alert('meal: ' + mealId + ' was added to basket');
+                });
+
+                poster.fail(function() {
+                    alert('Could not add to basket');
+                });
+
+                poster.always(function() {
+                    console.log("always happening :)");
+                });
+
+            });
+
+        }(jQuery));
+
+    </script>
+}
 
 

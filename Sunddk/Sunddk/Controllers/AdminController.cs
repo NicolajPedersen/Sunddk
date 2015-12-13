@@ -32,6 +32,7 @@ namespace Sunddk.Controllers
                 mealPlan.Name = mealPlanView.Name;
                 mealPlan.MaxCalories = mealPlanView.MaxCalories;
                 mealPlan.Description = mealPlanView.Description;
+                mealPlan.IsAdmin = true;
                 db.MealPlans.Add(mealPlan);
                 db.SaveChanges();
 

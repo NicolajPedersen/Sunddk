@@ -10,8 +10,7 @@ using System.Data.Entity.Infrastructure;
 namespace Sunddk.Controllers
 {
     public class UserController : Controller
-    {
-        
+    {   
         // GET: User
         [HttpGet]
         public ActionResult UserProfile(string email)
@@ -61,33 +60,35 @@ namespace Sunddk.Controllers
         [HttpGet]
         public ActionResult List(string email) {
             List<MealPlan> mealplans = new List<MealPlan>();
+            MealPlan userMealPlan = new MealPlan();
+            userMealPlan.IsAdmin = false;
             ViewBag.Email = email;
             using (var db = new Models.MealPlanContext()) {
-                mealplans = db.MealPlans.ToList();
+                mealplans = db.MealPlans.Where(p => p.IsAdmin == true).ToList();
             }
             return View(mealplans);
         }
         
         //CM07 #FB03
-        [HttpPost]
-        public ActionResult List(int mealPlanId, string email) {
-            PersonMealPlan personMealPlan = new PersonMealPlan();
-            Person person = new Person();
-            MealPlan mealPlan = new MealPlan();
-            using (var db = new Models.MealPlanContext()) {
-                person = db.Persons.First(p => p.Email == email);
-                mealPlan = db.MealPlans.First(m => m.MealPlanId == mealPlanId);
-                personMealPlan.BeginDate = DateTime.Now.Date;
-                personMealPlan.EndDate = DateTime.Now.Date;
-                personMealPlan.IsActive = true;
-                personMealPlan.MealPlan = mealPlan;
-                personMealPlan.Person = person;
-                db.PersonMealPlans.Add(personMealPlan);
-                db.SaveChanges();
+        //[HttpPost]
+        //public ActionResult List(int mealPlanId, string email) {
+        //    PersonMealPlan personMealPlan = new PersonMealPlan();
+        //    Person person = new Person();
+        //    MealPlan mealPlan = new MealPlan();
+        //    using (var db = new Models.MealPlanContext()) {
+        //        person = db.Persons.First(p => p.Email == email);
+        //        mealPlan = db.MealPlans.First(m => m.MealPlanId == mealPlanId);
+        //        personMealPlan.BeginDate = DateTime.Now.Date;
+        //        personMealPlan.EndDate = DateTime.Now.Date;
+        //        personMealPlan.IsActive = true;
+        //        personMealPlan.MealPlan = mealPlan;
+        //        personMealPlan.Person = person;
+        //        db.PersonMealPlans.Add(personMealPlan);
+        //        db.SaveChanges();
 
-                return RedirectToAction("UserProfile", "User", new { Email = email });
-            }
-        }
+        //        return RedirectToAction("UserProfile", "User", new { Email = email });
+        //    }
+        //}
 
         //CM07 #FB03
         [HttpGet]
@@ -99,8 +100,9 @@ namespace Sunddk.Controllers
 
         //CM07 #FB03
         [HttpGet]
-        public ActionResult Meals(string type, string mealPlanId) {
+        public ActionResult Meals(string type, string mealPlanId, string email) {
             ViewBag.Type = type;
+            ViewBag.Email = email;
             int mealplanId = Convert.ToInt32(mealPlanId);
             List<MealPlan> mealPlan = new List<MealPlan>();
             using (var db = new Models.MealPlanContext()) {
@@ -118,6 +120,44 @@ namespace Sunddk.Controllers
                 }
             }
             return View(meals);
+        }
+
+        [HttpPost]
+        public ActionResult AddtoBasket(int mealId, string email) {
+            //Basket basket = new Basket();
+            Person person = new Person();
+            using (var db = new MealPlanContext()) {
+                person = db.Persons.First(p => p.Email == email);
+                //basket.MealId = mealId;
+                //basket.Person = person;
+                //db.Basket.Add(basket);
+                //db.SaveChanges();
+            }
+            //HttpContext.Session.Add("List", mealIds);
+
+
+            return Content("Ok");
+        }
+
+        [HttpGet]
+        public ActionResult Done(string email) {
+            MealPlan userMealPlan = new MealPlan();
+            Person person = new Person();
+            PersonMealPlan personMealPlan = new PersonMealPlan();
+            using (var db = new MealPlanContext()) {
+                userMealPlan.IsAdmin = false;
+                userMealPlan.MealsId = new List<int>();
+                db.MealPlans.Add(userMealPlan);
+                person = db.Persons.First(p => p.Email == email);
+                personMealPlan.BeginDate = DateTime.Now.Date;
+                personMealPlan.EndDate = DateTime.Now.Date;
+                personMealPlan.IsActive = true;
+                personMealPlan.MealPlan = userMealPlan;
+                personMealPlan.Person = person;
+                db.PersonMealPlans.Add(personMealPlan);
+                db.SaveChanges();
+            }
+            return RedirectToAction("UserProfile", "User", new { Email = email });
         }
 
         //CM07 #FB03

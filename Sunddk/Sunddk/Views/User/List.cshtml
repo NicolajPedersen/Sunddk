@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "List";
-    string email = ViewBag.Email;
+    string email = @ViewBag.Email;
 }
 
 <h2>List</h2>
@@ -56,6 +56,17 @@
 }
 
 </table>
+
+@using (Html.BeginForm("Done", "User", FormMethod.Get, new { @class = "form-horizontal", role = "form" })) { 
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.Hidden("Email", email)
+            <div>
+                <input type="submit" value="Done" class="btn btn-default" /> @*Det skal laves sådan at når man trykker done så opretter den selv en ny userMealPlan hvor den tilføjer de meals man har lagt i session og herefter kobler mealplanene til personen*@
+            </div>
+        </div>
+    </div>
+}
 
 <div id="mealPlanFeed">
     <div class="mealPlan img-rounded">

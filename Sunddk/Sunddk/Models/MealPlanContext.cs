@@ -17,6 +17,6 @@ namespace Sunddk.Models
         public DbSet<Person> Persons { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
         public DbSet<PersonMealPlan> PersonMealPlans { get; set; }
-
+        public DbSet<Basket> Baskets { get; set; }
     }
 }
