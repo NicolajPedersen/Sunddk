@@ -61,10 +61,19 @@ namespace Sunddk.Controllers
         public ActionResult List(string email) {
             List<MealPlan> mealplans = new List<MealPlan>();
             MealPlan userMealPlan = new MealPlan();
+            PersonMealPlan personMealPlan = new PersonMealPlan();
             userMealPlan.IsAdmin = false;
             ViewBag.Email = email;
             using (var db = new Models.MealPlanContext()) {
-                mealplans = db.MealPlans.Where(p => p.IsAdmin == true).ToList();
+                mealplans = db.MealPlans.Where(p => p.IsAdmin == true).ToList(); //Skal kunne hente ud sådan at det er indenfor de kalorier som man må få (BMR)
+                personMealPlan = db.PersonMealPlans.FirstOrDefault(mp => mp.Person.Email == email && mp.IsActive == true);
+                if (personMealPlan == null) {
+                    return View(mealplans);
+                }
+                else {
+                    personMealPlan.IsActive = false;
+                    db.SaveChanges();
+                }  
             }
             return View(mealplans);
         }
@@ -124,17 +133,15 @@ namespace Sunddk.Controllers
 
         [HttpPost]
         public ActionResult AddtoBasket(int mealId, string email) {
-            //Basket basket = new Basket();
+            Basket basket = new Basket();
             Person person = new Person();
             using (var db = new MealPlanContext()) {
                 person = db.Persons.First(p => p.Email == email);
-                //basket.MealId = mealId;
-                //basket.Person = person;
-                //db.Basket.Add(basket);
-                //db.SaveChanges();
+                basket.MealId = mealId;
+                basket.Person = person;
+                db.Baskets.Add(basket);
+                db.SaveChanges();
             }
-            //HttpContext.Session.Add("List", mealIds);
-
 
             return Content("Ok");
         }
@@ -143,18 +150,31 @@ namespace Sunddk.Controllers
         public ActionResult Done(string email) {
             MealPlan userMealPlan = new MealPlan();
             Person person = new Person();
+            Basket basket = new Basket();
+
             PersonMealPlan personMealPlan = new PersonMealPlan();
             using (var db = new MealPlanContext()) {
-                userMealPlan.IsAdmin = false;
-                userMealPlan.MealsId = new List<int>();
-                db.MealPlans.Add(userMealPlan);
                 person = db.Persons.First(p => p.Email == email);
+                userMealPlan.IsAdmin = false;
+                db.MealPlans.Add(userMealPlan);
+                foreach (var b in db.Baskets) {
+                    if (person.PersonId == b.PersonId) {
+                        foreach (var m in db.Meals) {
+                            if (m.MealId == b.MealId) {
+                                m.MealPlans.Add(userMealPlan);
+                            }
+                        }
+                    }
+                }
                 personMealPlan.BeginDate = DateTime.Now.Date;
                 personMealPlan.EndDate = DateTime.Now.Date;
                 personMealPlan.IsActive = true;
                 personMealPlan.MealPlan = userMealPlan;
                 personMealPlan.Person = person;
                 db.PersonMealPlans.Add(personMealPlan);
+                db.SaveChanges();
+
+                db.Baskets.RemoveRange(db.Baskets.Where(b => b.PersonId == person.PersonId));
                 db.SaveChanges();
             }
             return RedirectToAction("UserProfile", "User", new { Email = email });
@@ -164,10 +184,14 @@ namespace Sunddk.Controllers
         [HttpGet]
         public ActionResult CurrentMealPlan(string email) {
             PersonMealPlan personMealPlan = new PersonMealPlan();
+            List<MealPlan> mealPlan = new List<MealPlan>();
+            PersonMealPlanViewModel personMealPlanViewModel;
             using (var db = new Models.MealPlanContext()) {
                 personMealPlan = db.PersonMealPlans.First(pmp => pmp.Person.Email == email && pmp.IsActive == true);
+                mealPlan = db.MealPlans.Include(mp => mp.Meals).Where(mp => mp.MealPlanId == personMealPlan.MealPlan.MealPlanId).ToList();
+                personMealPlanViewModel = new PersonMealPlanViewModel(personMealPlan, mealPlan[0].Meals);
             }
-            return View(personMealPlan);
+            return View(personMealPlanViewModel);
         }
     }
 }

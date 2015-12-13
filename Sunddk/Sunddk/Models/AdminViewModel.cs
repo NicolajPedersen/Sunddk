@@ -24,5 +24,6 @@ namespace Sunddk.Models {
         public string Description { get; set; }
         public double Calories { get; set; }
         public double Weight { get; set; }
+        public string Type { get; set; }
     }
 }

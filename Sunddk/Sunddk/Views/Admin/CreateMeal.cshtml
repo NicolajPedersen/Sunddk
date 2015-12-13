@@ -2,6 +2,13 @@
 
 @{
     ViewBag.Title = "CreateMeal";
+
+    List<SelectListItem> categories = new List<SelectListItem>();
+    categories.Add(new SelectListItem { Text = "--Vælg--" });
+    categories.Add(new SelectListItem { Text = "Morgenmad" });
+    categories.Add(new SelectListItem { Text = "Middagsmad" });
+    categories.Add(new SelectListItem { Text = "Aftensmad" });
+    categories.Add(new SelectListItem { Text = "Mellemmåltid" });
 }
 
 <h2>CreateMeal</h2>
@@ -43,6 +50,13 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Type, categories)
             </div>
         </div>
 

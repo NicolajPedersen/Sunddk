@@ -9,11 +9,11 @@
 }
 
 <h2>@ViewBag.Type</h2>
-
+@Styles.Render("~/Content/User.css")
 <p>
     @Html.ActionLink("Back to Categories", "Categories", new { MealPlanId = MealPlanId, Email = @ViewBag.Email})
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -48,14 +48,39 @@
                 <div>
                     <a data-meal-id="@item.MealId" data-person-id="@ViewBag.Email" class="btn-admin btn-default btn-add-to-basket">Add to basket</a>
                 </div>
-                @*@Html.ActionLink("Vælg", "AddToNewUserMealPlan", new { MealId = item.MealId })*@
-                @*@Html.ActionLink("Details", "Details", new { id=item.MealPlanId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.MealPlanId })*@
             </td>
         </tr>
     }
+</table>*@
 
-</table>
+<div id="mealFeed">
+    @foreach (var item in Model) {
+        <div class="meal img-rounded">
+            @*<div class="img-meal">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT1BQ46blKGyc9u11cBzk8cB0nzvYimfBMCKtewcTwLRjGhhJ1j" alt="" />
+                </div>*@
+            <div class="meal-info">
+                <div style="float:left; margin-left: 10px; position: relative; display: block; clear: both;">
+                    <h2 style="color:#ffffff">@Html.DisplayFor(modelItem => item.Name)</h2>
+                </div>
+                <div style="float:left; margin-left: 10px; position: relative; display: block; clear: both;">
+                    <p style="color:#ffffff">@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+                <div style="float: left; position: absolute; top: 0px; right: 0px; margin-top: 10px; margin-right: 10px; border-style: solid; border-color: #000000; border-width: 2px;">
+                    <div style="float:left; margin: 5px 5px 0px 5px; position: relative; display: inline-block;">
+                        <p style="color:#ffffff">@Html.DisplayNameFor(model => model.Calories): @Html.DisplayFor(modelItem => item.Calories)</p>
+                    </div>
+                    <div style="float:left; margin: 5px 5px 0px 5px; position: relative; display: inline-block;">
+                        <p style="color:#ffffff">@Html.DisplayNameFor(model => model.Weight): @Html.DisplayFor(modelItem => item.Weight)</p>
+                    </div>
+                </div>
+                <div style="float: left; position: absolute; bottom: 0px; right: 0px; margin-bottom: 10px; margin-right: 10px;">
+                    <a data-meal-id="@item.MealId" data-person-id="@ViewBag.Email" class="btn-admin btn-default btn-add-to-basket">Add to basket</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @section scripts{
     <script>

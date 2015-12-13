@@ -39,18 +39,7 @@
             @Html.DisplayFor(modelItem => item.MealPlanId)
         </td>
         <td>
-            @Html.ActionLink("Se", "Categories", new { MealPlanId = item.MealPlanId, Email = ViewBag.Email }, new { @class = "btn-admin btn-default" }) |
-            @using (Html.BeginForm("List", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
-                @Html.Hidden("MealPlanId", item.MealPlanId)
-                @Html.Hidden("Email", email)
-                
-                <input type="submit" value="Vælg" class="btn-admin btn-default" />
-            }
-
-            @*@Html.ActionLink("Vælg", "List", new { MealPlanId = item.MealPlanId, Email = ViewBag.Email })*@
-            @*@Html.ActionLink("Details", "Details", new { id=item.MealPlanId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MealPlanId })*@
-            @* Man kunne senere lave det sådan at man selv kunne lave sin egen MealPlan, ved selv at vælge de måltide i de forskellige typer som man gerne vil have også oprette en MealPlan selv og koble den på personen *@
+            @Html.ActionLink("Se", "Categories", new { MealPlanId = item.MealPlanId, Email = ViewBag.Email }, new { @class = "btn-admin btn-default" })
         </td>
     </tr>
 }

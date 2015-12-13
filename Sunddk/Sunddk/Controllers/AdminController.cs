@@ -62,6 +62,7 @@ namespace Sunddk.Controllers
                 meal.Description = mealView.Description;
                 meal.Calories = mealView.Calories;
                 meal.Weight = mealView.Weight;
+                meal.Type = mealView.Type;
                 meal.MealPlans = new List<MealPlan>();
                 meal.MealPlans.Add(mealPlan);
                 db.Meals.Add(meal);
