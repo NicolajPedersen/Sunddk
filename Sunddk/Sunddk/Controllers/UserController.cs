@@ -10,7 +10,7 @@ using System.Data.Entity.Infrastructure;
 namespace Sunddk.Controllers
 {
     public class UserController : Controller
-    {   
+    {
         // GET: User
         [HttpGet]
         public ActionResult UserProfile(string email)
