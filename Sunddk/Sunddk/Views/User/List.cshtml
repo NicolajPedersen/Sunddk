@@ -5,12 +5,10 @@
     string email = @ViewBag.Email;
 }
 
-<h2>List</h2>
+<h2>Kostplaner</h2>
 @Styles.Render("~/Content/User.css")
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -43,21 +41,46 @@
         </td>
     </tr>
 }
+</table>*@
 
-</table>
+<div id="mealFeed">
+    @foreach (var item in Model) {
+        <div class="meal img-rounded">
+            @*<div class="img-meal">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT1BQ46blKGyc9u11cBzk8cB0nzvYimfBMCKtewcTwLRjGhhJ1j" alt="" />
+                </div>*@
+            <div class="meal-info">
+                <div style="float:left; margin-left: 10px; position: relative; display: block; clear: both;">
+                    <h2 style="color:#ffffff">@Html.DisplayFor(modelItem => item.Name)</h2>
+                </div>
+                <div style="float:left; margin-left: 10px; position: relative; display: block; clear: both;">
+                    <p style="color:#ffffff">@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+                <div style="float: left; position: absolute; top: 0px; right: 0px; margin-top: 10px; margin-right: 10px; border-style: solid; border-color: #000000; border-width: 2px;">
+                    <div style="float:left; margin: 5px 5px 0px 5px; position: relative; display: inline-block;">
+                        <p style="color:#ffffff">@Html.DisplayNameFor(model => model.MaxCalories): @Html.DisplayFor(modelItem => item.MaxCalories)</p>
+                    </div>
+                </div>
+                <div style="float: left; position: absolute; bottom: 0px; right: 0px; margin-bottom: 10px; margin-right: 10px;">
+                    @Html.ActionLink("Se", "Categories", new { MealPlanId = item.MealPlanId, Email = ViewBag.Email }, new { @class = "btn-admin btn-default" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @using (Html.BeginForm("Done", "User", FormMethod.Get, new { @class = "form-horizontal", role = "form" })) { 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             @Html.Hidden("Email", email)
-            <div>
+            <div style="right: 0px; margin-right: 10px; margin-top: 10px; position: absolute;">
                 <input type="submit" value="Done" class="btn btn-default" /> @*Det skal laves sådan at når man trykker done så opretter den selv en ny userMealPlan hvor den tilføjer de meals man har lagt i session og herefter kobler mealplanene til personen*@
             </div>
         </div>
     </div>
 }
 
-<div id="mealPlanFeed">
+@*<div id="mealPlanFeed">
     <div class="mealPlan img-rounded">
         <div class="img-mealPlan">
             <img src="~/Content/Images/sund_dklogo.jpg" alt="" />
@@ -111,4 +134,4 @@
             @Html.ActionLink("Vælg", "", "", new { @class = "btn btn-default" })
         </div>
     </div>
-</div>
+</div>*@
