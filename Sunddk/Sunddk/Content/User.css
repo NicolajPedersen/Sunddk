@@ -50,3 +50,42 @@ div img { /*Responsive*/
     float: left;
     margin-left: 20px;
 }
+
+#mealFeed {
+    height: 100%;
+    width: 100%;
+    float: left;
+    clear: both;
+    overflow: hidden;
+}
+
+.meal {
+    height: 100px;
+    width: 100%;
+    float: left;
+    position: relative;
+    background: #313133;
+    margin-bottom: 1px;
+    /*border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #000000;*/
+}
+
+.img-meal {
+    height: 0%;
+    width: 40%;
+    margin: 5px 0px 5px 5px;
+    position: relative;
+    float: left;
+}
+
+div img { /*Responsive*/
+    height: auto;
+    width: 80%;
+    max-width: 60%;
+    position: relative;
+}
+
+.meal-info {
+
+}

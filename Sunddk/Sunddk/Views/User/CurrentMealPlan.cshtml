@@ -1,4 +1,4 @@
-﻿@model Sunddk.Models.PersonMealPlan
+﻿@model Sunddk.Models.PersonMealPlanViewModel
 
 @{
     ViewBag.Title = "CurrentMealPlan";
@@ -7,7 +7,6 @@
 <h2>Nuværende Kostplan</h2>
 
 <div>
-    <h4>Person MealPlan</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -36,7 +35,49 @@
 
     </dl>
 </div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Description")
+        </th>
+        <th>
+            @Html.DisplayName("Calories")
+        </th>
+        <th>
+            @Html.DisplayName("Weight")
+        </th>
+        <th>
+            @Html.DisplayName("Type")
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Meals) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+        </tr>
+    }
+
+</table>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonMealPlanId }) |
+    @Html.ActionLink("Edit", "Edit", new { @*id = Model.PersonMealPlanId*@ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

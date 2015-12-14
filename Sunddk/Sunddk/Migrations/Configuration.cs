@@ -9,7 +9,7 @@ namespace Sunddk.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Sunddk.Models.MealPlanContext context)

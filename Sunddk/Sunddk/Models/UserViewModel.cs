@@ -20,4 +20,18 @@ namespace Sunddk.Models {
         public double BMR { get; set; }
         //public double BMI { get; set; }
     }
+
+    public class PersonMealPlanViewModel {
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool IsActive { get; set; }
+        public List<Meal> Meals { get; set; }
+
+        public PersonMealPlanViewModel(PersonMealPlan personMealPlan, List<Meal> meals) {
+            this.BeginDate = personMealPlan.BeginDate;
+            this.EndDate = personMealPlan.EndDate;
+            this.IsActive = personMealPlan.IsActive;
+            this.Meals = meals;
+        }
+    }
 }
